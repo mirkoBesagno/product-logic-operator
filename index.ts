@@ -137,15 +137,4 @@ export const and = function (variableToCompare: any, params: operator, howToHand
     }
 };
 
-try {
 
-    const tmp = or(() => { return 'ciao'; }, '==')('kk', () => { return 'ciao'; }, 'hahaha');
-    console.log(tmp);
-
-    console.log('');
-
-
-} catch (error) {
-    console.log(error);
-
-}
