@@ -4,22 +4,23 @@ type operator = '<' | '>' | '==' | '<=' | '>=' | '!=';
 
 type howToHandleError = 'error' | 'try' | 'return' | "skip";
 
+const messageErrore = "Error: different types"; // Errore: tipi differenti
 
-export const or = function (variabiliConfrontabile: any, params: operator, howToHandleError?: howToHandleError) {
-    return function (...variabiliDaConfrontare: any) {
-        for (const y of variabiliDaConfrontare) {
+export const or = function (variableToCompare: any, params: operator, howToHandleError?: howToHandleError) {
+    return function (...comparisonVariables: any) {
+        for (const y of comparisonVariables) {
             var salta = false;
             var tmpY = y;
             if (typeof y == 'function') {
                 tmpY = y();
             }
-            var tmpVariabiliConfrontabile = variabiliConfrontabile;
-            if(typeof variabiliConfrontabile == 'function') {
-                tmpVariabiliConfrontabile = variabiliConfrontabile();
+            var tmpVariabiliConfrontabile = variableToCompare;
+            if (typeof variableToCompare == 'function') {
+                tmpVariabiliConfrontabile = variableToCompare();
             }
             if (typeof tmpVariabiliConfrontabile != typeof tmpY) {
                 if (howToHandleError == 'error' || howToHandleError == undefined) {
-                    throw new Error("Attenzione tipi differenti");
+                    throw new Error(messageErrore);
                 }
                 else if (howToHandleError == 'return') {
                     return false;
@@ -70,21 +71,21 @@ export const or = function (variabiliConfrontabile: any, params: operator, howTo
         return false;
     }
 };
-export const and = function (variabiliConfrontabile: any, params: operator, howToHandleError?: howToHandleError) {
-    return function (...variabiliDaConfrontare: any) {
-        for (const y of variabiliDaConfrontare) {
+export const and = function (variableToCompare: any, params: operator, howToHandleError?: howToHandleError) {
+    return function (...comparisonVariables: any) {
+        for (const y of comparisonVariables) {
             var salta = false;
             var tmpY = y;
             if (typeof y == 'function') {
                 tmpY = y();
             }
-            var tmpVariabiliConfrontabile = variabiliConfrontabile;
-            if(typeof variabiliConfrontabile == 'function') {
-                tmpVariabiliConfrontabile = variabiliConfrontabile();
+            var tmpVariabiliConfrontabile = variableToCompare;
+            if (typeof variableToCompare == 'function') {
+                tmpVariabiliConfrontabile = variableToCompare();
             }
             if (typeof tmpVariabiliConfrontabile != typeof tmpY) {
                 if (howToHandleError == 'error' || howToHandleError == undefined) {
-                    throw new Error("Attenzione tipi differenti");
+                    throw new Error(messageErrore);
                 }
                 else if (howToHandleError == 'return') {
                     return false;
@@ -135,6 +136,7 @@ export const and = function (variabiliConfrontabile: any, params: operator, howT
         return true;
     }
 };
+
 try {
 
     const tmp = or(() => { return 'ciao'; }, '==')('kk', () => { return 'ciao'; }, 'hahaha');
