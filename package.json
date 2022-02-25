@@ -1,8 +1,8 @@
 {
   "name": "product-logic-operator",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.1",
+  "description": "It is inspired by the concept of polynomial multiplication and tries to reproduce the concept in comparison operations.",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node ./index.ts"
@@ -16,5 +16,13 @@
   "devDependencies": {
     "ts-node": "^10.5.0",
     "typescript": "^4.5.5"
-  }
+  },
+  "keywords": [
+    "product-logic-operator",
+    "operator",
+    "logic-operator",
+    "comparation",
+    "mp"
+  ],
+  "homepage": "https://github.com/mirkoBesagno/product-logic-operator#readme"
 }
