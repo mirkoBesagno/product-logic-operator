@@ -9,6 +9,10 @@
   },
   "author": "Mirko Pizzini <mirkopizzini93@gmail.com> (https://github.com/mirkoBesagno/MP-project-tools)",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mirkoBesagno/product-logic-operator.git"
+  },
   "devDependencies": {
     "ts-node": "^10.5.0",
     "typescript": "^4.5.5"
