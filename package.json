@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node ./index.ts"
   },
-  "author": "Mirko Pizzini <mirkopizzini93@gmail.com> (https://github.com/mirkoBesagno/MP-project-tools)",
-  "license": "ISC",
+  "author": "Mirko Pizzini <mirkopizzini93@gmail.com> (https://github.com/mirkoBesagno/product-logic-operator)",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mirkoBesagno/product-logic-operator.git"
