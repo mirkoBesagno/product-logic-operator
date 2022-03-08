@@ -6,7 +6,8 @@ export type howToHandleError = 'error' | 'try' | 'return' | "skip";
 
 const messageErrore = "Error: different types"; // Errore: tipi differenti
 
-export const or = function (variableToCompare: any, params: operator, howToHandleError?: howToHandleError) {
+export const or = function (variableToCompare: any, params?: operator | ((x: any) => boolean), howToHandleError?: howToHandleError) {
+    if (params == undefined) params == '==';
     return function (...comparisonVariables: any) {
         for (const y of comparisonVariables) {
             var salta = false;
@@ -32,7 +33,9 @@ export const or = function (variableToCompare: any, params: operator, howToHandl
                 }
             }
             if (salta == false) {
-                switch (params) {
+                const tmp = SwitchConfronto(params, tmpVariabiliConfrontabile, tmpY);
+                if(tmp) return true;
+               /*  switch (params) {
                     case '==':
                         if (tmpVariabiliConfrontabile == tmpY) {
                             return true;
@@ -64,14 +67,20 @@ export const or = function (variableToCompare: any, params: operator, howToHandl
                         }
                         break;
                     default:
+                        if (params) {
+                            if (params(tmpY) == true) {
+                                return true;
+                            }
+                        }
                         break;
-                }
+                } */
             }
         }
         return false;
     }
 };
-export const and = function (variableToCompare: any, params: operator, howToHandleError?: howToHandleError) {
+export const and = function (variableToCompare: any, params?: operator | ((x: any) => boolean), howToHandleError?: howToHandleError) {
+    if (params == undefined) params == '==';
     return function (...comparisonVariables: any) {
         for (const y of comparisonVariables) {
             var salta = false;
@@ -97,7 +106,9 @@ export const and = function (variableToCompare: any, params: operator, howToHand
                 }
             }
             if (salta == false) {
-                switch (params) {
+                const tmp = SwitchConfronto(params, tmpVariabiliConfrontabile, tmpY);
+                if(!tmp) return false;
+                /* switch (params) {
                     case '==':
                         if (!(tmpVariabiliConfrontabile == tmpY)) {
                             return false;
@@ -129,8 +140,13 @@ export const and = function (variableToCompare: any, params: operator, howToHand
                         }
                         break;
                     default:
+                        if (params) {
+                            if (params(tmpY) == true) {
+                                return true;
+                            }
+                        }
                         break;
-                }
+                } */
             }
         }
         return true;
@@ -169,3 +185,47 @@ function Decisione(y: any, variableToCompare: any, howToHandleError?: howToHandl
     };
 }
 
+function SwitchConfronto(params: operator | ((x: any) => boolean) | undefined,
+    tmpVariabiliConfrontabile: any,
+    tmpY: any) {
+    switch (params) {
+        case '==':
+            if (tmpVariabiliConfrontabile == tmpY) {
+                return true;
+            }
+            break;
+        case "!=":
+            if (tmpVariabiliConfrontabile != tmpY) {
+                return true;
+            }
+            break;
+        case "<":
+            if (tmpVariabiliConfrontabile < tmpY) {
+                return true;
+            }
+            break;
+        case "<=":
+            if (tmpVariabiliConfrontabile <= tmpY) {
+                return true;
+            }
+            break;
+        case ">":
+            if (tmpVariabiliConfrontabile > tmpY) {
+                return true;
+            }
+            break;
+        case ">=":
+            if (tmpVariabiliConfrontabile >= tmpY) {
+                return true;
+            }
+            break;
+        default:
+            if (params) {
+                if (params(tmpY) == true) {
+                    return true;
+                }
+            }
+            break;
+    }
+    return false;
+}

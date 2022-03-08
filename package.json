@@ -1,6 +1,6 @@
 {
   "name": "product-logic-operator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "It is inspired by the concept of polynomial multiplication and tries to reproduce the concept in comparison operations.",
   "main": "index.ts",
   "scripts": {
