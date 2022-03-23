@@ -1,89 +1,73 @@
 
-
+/* 
 export type operator = '<' | '>' | '==' | '<=' | '>=' | '!=';
 
 export type howToHandleError = 'error' | 'try' | 'return' | "skip";
 
 
-const messageErrore = "Error: different types"; // Errore: tipi differenti
-
-export const or = function (variableToCompare?: any, params?: operator | ((x: any) => boolean), howToHandleError?: howToHandleError) {
+const messageErrore = "Error: different types"; // Errore: tipi differenti */
+/* 
+export const or = function (variableToCompare?: any | Array<any>,
+    params?: operator | ((x: any) => boolean), howToHandleError?: howToHandleError) {
     if (params == undefined) params == '==';
     return function (...comparisonVariables: any) {
-        try {
-            for (const y of comparisonVariables) {
-                var salta = false;
-                var tmpY = y;
-                var tmpVariabiliConfrontabile = variableToCompare;
-                if (typeof y == 'function') {
-                    tmpY = y();
-                }
-                if (typeof variableToCompare == 'function') {
-                    tmpVariabiliConfrontabile = variableToCompare();
-                }
-                if (typeof tmpVariabiliConfrontabile != typeof tmpY && tmpVariabiliConfrontabile != undefined) {
-                    if (howToHandleError == 'error' || howToHandleError == undefined) {
-                        throw new Error(messageErrore);
-                    }
-                    else if (howToHandleError == 'return') {
-                        return false;
-                    } else if (howToHandleError == 'skip') {
-                        salta = true;
-                    }
-                    else if (howToHandleError == 'try') {
-                        salta = false;
-                    }
-                }
-                if (salta == false) {
-                    const tmp = SwitchConfronto(params, tmpVariabiliConfrontabile, tmpY);
-                    if (tmp) return true;
-                    /*  switch (params) {
-                         case '==':
-                             if (tmpVariabiliConfrontabile == tmpY) {
-                                 return true;
-                             }
-                             break;
-                         case "!=":
-                             if (tmpVariabiliConfrontabile != tmpY) {
-                                 return true;
-                             }
-                             break;
-                         case "<":
-                             if (tmpVariabiliConfrontabile < tmpY) {
-                                 return true;
-                             }
-                             break;
-                         case "<=":
-                             if (tmpVariabiliConfrontabile <= tmpY) {
-                                 return true;
-                             }
-                             break;
-                         case ">":
-                             if (tmpVariabiliConfrontabile > tmpY) {
-                                 return true;
-                             }
-                             break;
-                         case ">=":
-                             if (tmpVariabiliConfrontabile >= tmpY) {
-                                 return true;
-                             }
-                             break;
-                         default:
-                             if (params) {
-                                 if (params(tmpY) == true) {
-                                     return true;
-                                 }
-                             }
-                             break;
-                     } */
+        if (variableToCompare instanceof Array) {
+            for (const item of variableToCompare) {
+                var ritorno = OR(item, params, howToHandleError, comparisonVariables);
+                if(ritorno == true){
+                    return true;
                 }
             }
-        } catch (error) {
-            console.log(error);
+            return false;
         }
-        return false;
+        else {
+            return OR(variableToCompare, params, howToHandleError, comparisonVariables);
+        }
     }
 };
+function OR(variableToCompare: any, params: any, howToHandleError: any, comparisonVariables: any) {
+    try {
+        for (const y of comparisonVariables) {
+            var salta = false;
+            var tmpY;
+            var tmpVariabiliConfrontabile;
+            if (typeof y == 'function') {
+                tmpY = y();
+            }
+            else {
+                tmpY = y;
+            }
+            if (typeof variableToCompare == 'function') {
+                tmpVariabiliConfrontabile = variableToCompare();
+            }
+            else {
+                tmpVariabiliConfrontabile = variableToCompare;
+            }
+            if (typeof tmpVariabiliConfrontabile != typeof tmpY && tmpVariabiliConfrontabile != undefined) {
+                if (howToHandleError == 'error' || howToHandleError == undefined) {
+                    throw new Error(messageErrore);
+                }
+                else if (howToHandleError == 'return') {
+                    return false;
+                } else if (howToHandleError == 'skip') {
+                    salta = true;
+                }
+                else if (howToHandleError == 'try') {
+                    salta = false;
+                }
+            }
+            if (salta == false) {
+                const tmp = SwitchConfronto(params, tmpVariabiliConfrontabile, tmpY);
+                if (tmp) return true;
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    return false;
+} */
+
+
 export const and = function (variableToCompare: any, params?: operator | ((x: any) => boolean), howToHandleError?: howToHandleError) {
     if (params == undefined) params == '==';
     return function (...comparisonVariables: any) {
@@ -190,7 +174,7 @@ function Decisione(y: any, variableToCompare: any, howToHandleError?: howToHandl
     };
 }
 
-function SwitchConfronto(params: operator | ((x: any) => boolean) | undefined,
+/* function SwitchConfronto(params: operator | ((x: any) => boolean) | undefined,
     tmpVariabiliConfrontabile: any,
     tmpY: any) {
     switch (params) {
@@ -233,4 +217,4 @@ function SwitchConfronto(params: operator | ((x: any) => boolean) | undefined,
             break;
     }
     return false;
-}
+} */
