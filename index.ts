@@ -4,6 +4,7 @@ export type operator = '<' | '>' | '==' | '<=' | '>=' | '!=';
 
 export type howToHandleError = 'error' | 'try' | 'return' | "skip";
 
+
 const messageErrore = "Error: different types"; // Errore: tipi differenti
 
 export const or = function (variableToCompare: any, params?: operator | ((x: any) => boolean), howToHandleError?: howToHandleError) {

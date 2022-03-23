@@ -1,10 +1,12 @@
 {
   "name": "product-logic-operator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "It is inspired by the concept of polynomial multiplication and tries to reproduce the concept in comparison operations.",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "es5",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "ts-node ./index.ts",
     "start-esempio": "ts-node ./example.ts"
   },
@@ -28,7 +30,9 @@
     "mp"
   ],
   "homepage": "https://github.com/mirkoBesagno/product-logic-operator#readme",
-  "dependencies": {},
+  "dependencies": {
+    "mocha": "^9.2.1"
+  },
   "size-limit": [
     {
       "path": "dist/",
