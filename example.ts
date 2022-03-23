@@ -6,7 +6,7 @@ var tmp = false;
 
 
 function TestOR() {
-    try {
+    /* try {
         tmp = or(true, '==')(true, true, true);
         console.log(tmp);
         if (tmp == true) {
@@ -74,6 +74,90 @@ function TestOR() {
         console.log(error);
     }
     console.log('**************************************');
+    try {
+        tmp = or(undefined, '!=')('haha', 'mona', 'ciao');
+        console.log(tmp);
+        if (tmp == true) {
+            console.log("OK");
+        }
+        else {
+            console.log("NO!");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    console.log('**************************************');
+    try {
+        tmp = or(undefined, '!=')(undefined, undefined, undefined);
+        console.log(tmp);
+        if (tmp == false) {
+            console.log("OK");
+        }
+        else {
+            console.log("NO!");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    console.log('**************************************');
+    try {
+        tmp = or(undefined, '!=')(undefined, null);
+        console.log(tmp);
+        if (tmp == false) {
+            console.log("OK");
+        }
+        else {
+            console.log("NO!");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    console.log('**************************************');
+    try {
+        tmp = or(undefined, '!=')(undefined, undefined, 'ciao');
+        console.log(tmp);
+        if (tmp == true) {
+            console.log("OK");
+        }
+        else {
+            console.log("NO!");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    console.log('**************************************'); */
+    try {
+        const t1 = {
+            oggetto: {
+                ogg: {
+                    ko: {
+                        valore: 'vero'
+                    }
+                }
+            }
+        };
+        let t2 = {
+            oggetto: {
+                ogg: {
+                    ko: {
+                        valore: 'vero'
+                    }
+                }
+            }
+        };
+        (<any>t2) = undefined;
+        tmp = or('vero', '==')(t1.oggetto.ogg.ko.valore, t2.oggetto.ogg.ko.valore, 'ciao');
+        console.log(tmp);
+        if (tmp == true) {
+            console.log("OK");
+        }
+        else {
+            console.log("NO!");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    console.log('**************************************');
 }
 function TestAnd() {
     try {
@@ -123,6 +207,19 @@ function TestAnd() {
         })('haha', 'mona', 'ciao');
         console.log(tmp);
         if (tmp == false) {
+            console.log("OK");
+        }
+        else {
+            console.log("NO!");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    console.log('**************************************');
+    try {
+        tmp = and(undefined, '==')(undefined, null);
+        console.log(tmp);
+        if (tmp == true) {
             console.log("OK");
         }
         else {
