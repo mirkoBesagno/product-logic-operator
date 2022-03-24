@@ -1,12 +1,10 @@
-import { or, and } from ".";
+import { and } from "./src/and";
+import { or } from "./src/or";
 
 var tmp = false;
 
-
-
-
 function TestOR() {
-    /* try {
+    try {
         tmp = or(true, '==')(true, true, true);
         console.log(tmp);
         if (tmp == true) {
@@ -125,7 +123,7 @@ function TestOR() {
     } catch (error) {
         console.log(error);
     }
-    console.log('**************************************'); */
+    console.log('**************************************');
     try {
         const t1 = {
             oggetto: {

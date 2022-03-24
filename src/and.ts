@@ -2,7 +2,7 @@ import { howToHandleError, messageErrore, operator, SwitchConfronto } from "./ut
 
 
 
-export const and = function (variableToCompare: any, params?: operator | ((x: any) => boolean), 
+export const and = function (variableToCompare: any | Array<any>, params?: operator | ((x: any) => boolean), 
 howToHandleError?: howToHandleError) {
     if (params == undefined) params == '==';
     return function (...comparisonVariables: any) {
