@@ -9,11 +9,11 @@ howToHandleError?: howToHandleError) {
         if (variableToCompare instanceof Array) {
             for (const item of variableToCompare) {
                 var ritorno = AND(item, params, howToHandleError, comparisonVariables);
-                if (ritorno == true) {
-                    return true;
+                if (ritorno == false) {
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
         else {
             return AND(variableToCompare, params, howToHandleError, comparisonVariables);

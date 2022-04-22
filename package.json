@@ -8,7 +8,8 @@
   "scripts": {
     "test": "mocha",
     "start": "ts-node ./index.ts",
-    "start-esempio": "ts-node ./example.ts"
+    "start-esempio": "ts-node ./example.ts",
+    "publicare-pacchetto": "npx np"
   },
   "author": "Mirko Pizzini <mirkopizzini93@gmail.com> (https://github.com/mirkoBesagno/product-logic-operator)",
   "license": "MIT",

@@ -109,6 +109,74 @@ describe('test-and', function () {
       done(new Error("Errore!"));
     }
   });
+  it('-7', function (done) {
+    try {
+      tmp = and(['primo', 'secondo', 'terzo'], '!=')('quinto', 'sesto', 'settimo', 'ottavo', 'nono', 'decimo');
+      console.log(tmp);
+      if (tmp == true) {
+        console.log("OK");
+        done();
+      }
+      else {
+        console.log("NO!");
+        done(new Error("Errore!"));
+      }
+    } catch (error) {
+      console.log(error);
+      done(new Error("Errore!"));
+    }
+  });
+  it('-8', function (done) {
+    try {
+      tmp = and(['primo', 'secondo', 'terzo'], '!=')('primo','quinto', 'sesto', 'settimo', 'ottavo', 'nono', 'decimo');
+      console.log(tmp);
+      if (tmp == false) {
+        console.log("OK");
+        done();
+      }
+      else {
+        console.log("NO!");
+        done(new Error("Errore!"));
+      }
+    } catch (error) {
+      console.log(error);
+      done(new Error("Errore!"));
+    }
+  });
+  it('-9', function (done) {
+    try {
+      tmp = and([0,1,2,3,4], '<')(5,6,7,8,9,10,11,12,13,14);
+      console.log(tmp);
+      if (tmp == true) {
+        console.log("OK");
+        done();
+      }
+      else {
+        console.log("NO!");
+        done(new Error("Errore!"));
+      }
+    } catch (error) {
+      console.log(error);
+      done(new Error("Errore!"));
+    }
+  });
+  it('-10', function (done) {
+    try {
+      tmp = and([0,1,2,3,4], '>')(5,6,7,8,9,10,11,12,13,14);
+      console.log(tmp);
+      if (tmp == false) {
+        console.log("OK");
+        done();
+      }
+      else {
+        console.log("NO!");
+        done(new Error("Errore!"));
+      }
+    } catch (error) {
+      console.log(error);
+      done(new Error("Errore!"));
+    }
+  });
 });
 
 
@@ -255,6 +323,58 @@ describe('test-or', function () {
   it('-9', function (done) {
     try {
       tmp = or(undefined, '!=')(undefined, undefined, 'ciao');
+      console.log(tmp);
+      if (tmp == true) {
+        console.log("OK");
+        done();
+      }
+      else {
+        console.log("NO!");
+        done(new Error("Errore!"));
+      }
+    } catch (error) {
+      console.log(error);
+      done(new Error("Errore!"));
+    }
+  });
+
+  it('-10', function (done) {
+    try {
+      tmp = or(['primo', 'secondo', 'terzo'], '!=')('primo','quinto', 'sesto', 'settimo', 'ottavo', 'nono', 'decimo');
+      console.log(tmp);
+      if (tmp == true) {
+        console.log("OK");
+        done();
+      }
+      else {
+        console.log("NO!");
+        done(new Error("Errore!"));
+      }
+    } catch (error) {
+      console.log(error);
+      done(new Error("Errore!"));
+    }
+  });
+  it('-11', function (done) {
+    try {
+      tmp = or([0,1,2,3,6], '<')(5,6,7,8,9,10,11,12,13,14);
+      console.log(tmp);
+      if (tmp == true) {
+        console.log("OK");
+        done();
+      }
+      else {
+        console.log("NO!");
+        done(new Error("Errore!"));
+      }
+    } catch (error) {
+      console.log(error);
+      done(new Error("Errore!"));
+    }
+  });
+  it('-12', function (done) {
+    try {
+      tmp = or([0,1,2,3,6], '>')(5,6,7,8,9,10,11,12,13,14);
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
