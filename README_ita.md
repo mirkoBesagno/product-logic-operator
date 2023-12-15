@@ -1,34 +1,54 @@
 
-Si ispira al concetto di moltiplicazione polinomiale e cerca di riproporre il concetto nelle operazioni di confronto.
+# Introduzione
+Si ispira al concetto di **moltiplicazione polinomiale** e cerca di riproporre il concetto nelle **operazioni di confronto**.
 Per il momento è molto minimale, per comprendere si propone un esempio:
 
-a == x1 || a == x2 || a == x3 || a == x4 || a == x5
+## Esempio
+### OR
+Questo è una serie di confronti scritti in maniera classica.
+> a == x1 || a == x2 || a == x3 || a == x4 || a == x5
+ 
+da cosi diventerebbe cosi: 
 
-diventerebbe
+> or(a, '==')(x1,x2,x3,x4,x5);
 
-or(a, '==')(x1,x2,x3,x4,x5);
-
+### AND
 similmente:
 
-a == x1 && a == x2 && a == x3 && a == x4 && a == x5
+> a == x1 && a == x2 && a == x3 && a == x4 && a == x5
 
 diventerebbe
 
-and(a, '==')(x1,x2,x3,x4,x5);
+> and(a, '==')(x1,x2,x3,x4,x5);
+# OPZIONI
+accetta tipi normali: string e number. Accetta funzioni e le esegue prima di compararle. 
+> Attenzione in caso di errore rilancerà l'errore cosi come è.
 
-
-accetta tipi normali: strin, number
-accetta funzioni e le esegue prima di compararle, attenzione in caso di errore rilancerà l'errore cosi come è.
-
+## howToHandleError
 se i tipi sono differenti i casi gestibili sono specificabili settando la variabile howToHandleError:
-'error' | 'try' | 'return' | "skip"
-credo che i nomi parlino da soli
-error = solleva un errore: Errore: tipi differenti (questo è settabile in caso modificando la variabile messageErrore)
-try = provera il confronto
-return = restituira il confronto come se fosse andato male
-skip = saltera quella comparazione
+- error : solleva un errore: Errore: tipi differenti (questo è settabile in caso modificando la variabile messageErrore)
+- try:  provera il confronto
+- return : ritorna falso se i tipi sono differenti
+- skip : evita il confronto se i tipi sono differenti
+- convert : prova la confronto ma prima prova a convertire a un valore comune
 
-se non gestito solleva l'errore di dafault.
+# Operatori
+Ultima cosa è il discorso degli operatori di confronto. Questi sono i classici ( ==, <, >, ecc) in oltre è possibile andare a inserire una funzione che svolga questo compito.
+> es: and(tmp, (x, y) => { if(x>y)return true; else return false; }, 'convert')(true, 'true', 1);
 
-questo è un hobby, quindi sarò molto felice di leggere ogni suggerimento e di vedere ogni modifica. ma non aspettatevi una mia reattività, quando entro vedo se no non vedo. spesso entro, e di solito potrei dire che una (little) visita al giorno la faccio, ma magari ci sono periodi buchi di mesi. quindi prendiamocela con calma e no stress.
-vi ringrazio in anticipo per tutto e spero che l'uso della libreria sia per voi un aiuto.
+# Shot
+Funzione che si propone si eseguire una operazione in un try-catch, cercando di snellire il procedimento e la scrittura.
+Accetta in ingresso o una funzione oppure un valore. (sto pensando se inserire delle opzioni che possano andare a specificare meglio cosa succede in fase di conversione.)
+
+## Esempio
+const messaggio = shot(() => {
+    if (tmp == true) {
+        return 'ciao';
+    }
+    else if (tmp == false) {
+        return 'wella';
+    }
+    else {
+        throw new Error("monazza");
+    }
+});

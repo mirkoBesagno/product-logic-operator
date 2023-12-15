@@ -8,12 +8,12 @@ import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchScelt
  * @param howToHandleError :CC
  * @returns :true o false
  */
-export const and = function (variableToCompare: any | Array<any>, params?: operator, howToHandleError?: howToHandleError):any {
+export const by = function (variableToCompare: any | Array<any>, params?: operator, howToHandleError?: howToHandleError) {
     if (params == undefined) params = '==';
     return function (...comparisonVariables: any) {
         if (variableToCompare instanceof Array) {
             for (const item of variableToCompare) {
-                var ritorno = AND(item, params, howToHandleError ?? 'error', comparisonVariables);
+                var ritorno = BY(item, params, howToHandleError ?? 'error', comparisonVariables);
                 if (ritorno == false) {
                     return false;
                 }
@@ -21,7 +21,7 @@ export const and = function (variableToCompare: any | Array<any>, params?: opera
             return true;
         }
         else {
-            return AND(variableToCompare, params, howToHandleError ?? 'error', comparisonVariables);
+            return BY(variableToCompare, params, howToHandleError ?? 'error', comparisonVariables);
         }
     }
 };
@@ -33,7 +33,7 @@ export const and = function (variableToCompare: any | Array<any>, params?: opera
  * @param howToHandleError :CC
  * @returns :true o false
  */
-function AND(variableToCompare: any, params: any, howToHandleError: howToHandleError, comparisonVariables: any):any {
+function BY(variableToCompare: any, params: any, howToHandleError: howToHandleError, comparisonVariables: any) {
     for (const y of comparisonVariables) {
         var salta = false;
         var tmpY = y;
@@ -44,7 +44,8 @@ function AND(variableToCompare: any, params: any, howToHandleError: howToHandleE
         if (typeof variableToCompare == 'function') {
             tmpVariabiliConfrontabile = variableToCompare();
         }
-        if (typeof tmpVariabiliConfrontabile != typeof tmpY && tmpVariabiliConfrontabile != undefined) { 
+        if (typeof tmpVariabiliConfrontabile != typeof tmpY && tmpVariabiliConfrontabile != undefined) {
+            debugger;
             const tmp = SwitchSceltaGestioneErrore(howToHandleError, y, tmpVariabiliConfrontabile);
             if (tmp.errore) {
                 throw new Error(tmp.errore);

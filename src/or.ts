@@ -1,11 +1,10 @@
-import { howToHandleError, messageErrore, operator, SwitchConfronto } from "./utility";
+import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "./utility";
 
 
 
 
-export const or = function (variableToCompare?: any | Array<any>,
-    params?: operator | ((x: any) => boolean), howToHandleError?: howToHandleError) {
-    if (params == undefined) params == '==';
+export const or = function (variableToCompare?: any | Array<any>, params?: operator, howToHandleError?: howToHandleError) {
+    if (params == undefined) params = '==';
     return function (...comparisonVariables: any) {
         if (variableToCompare instanceof Array) {
             for (const item of variableToCompare) {
@@ -40,16 +39,14 @@ function OR(variableToCompare: any, params: any, howToHandleError: any, comparis
                 tmpVariabiliConfrontabile = variableToCompare;
             }
             if (typeof tmpVariabiliConfrontabile != typeof tmpY && tmpVariabiliConfrontabile != undefined) {
-                if (howToHandleError == 'error' || howToHandleError == undefined) {
-                    throw new Error(messageErrore);
-                }
-                else if (howToHandleError == 'return') {
-                    return false;
-                } else if (howToHandleError == 'skip') {
-                    salta = true;
-                }
-                else if (howToHandleError == 'try') {
-                    salta = false;
+                const tmp = SwitchSceltaGestioneErrore(howToHandleError, y, tmpVariabiliConfrontabile);
+                if (tmp.errore) {
+                    throw new Error(tmp.errore);
+                } else if (tmp.interrupt) {
+                    return tmp.interrupt;
+                } else {
+                    salta = tmp.salta ?? false;
+                    tmpY = tmp.tmpY;
                 }
             }
             if (salta == false) {
