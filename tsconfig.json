@@ -17,13 +17,17 @@
     "noImplicitReturns": true, /* Enable error reporting for codepaths that do not explicitly return in a function. */
     "noImplicitOverride": true, /* Ensure overriding members in derived classes are marked with an override modifier. */
     "skipLibCheck": true, /* Skip type checking all .d.ts files. */
-    "incremental": true
+    "incremental": true,
+    "declarationDir": "./dist", /* Specify the output directory for generated declaration files. */
   },
-  "include": [
-    "./**/*"
+  "include": [ 
+    "./test/**/*.ts",
+    "./src/**/*.ts",
+    "./index.ts"
   ],
-  "exclude": [
-    "dist" // This is what fixed it!
+  "exclude": [ 
+    "./**/*.d.ts",
+    "dist"  // This is what fixed it! 
   ]
 }
 /* Visit https://aka.ms/tsconfig.json to read more about this file */

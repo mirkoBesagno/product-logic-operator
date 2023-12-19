@@ -1,0 +1,14 @@
+{
+    "source": {
+        "include": [
+            "./dist"
+        ],
+        "exclude": [
+            "node_modules", 
+            "test"
+        ]
+    },
+    "opts": {
+        "destination": "./docs-js"
+    }
+}

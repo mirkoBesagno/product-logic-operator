@@ -10,8 +10,7 @@ import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchScelt
  * @param howToHandleError :CC
  * @returns :true o false
  */
-export const shot = function (item: Function | any) {
-    debugger;
+export const shot = function (item: Function | any) { 
     try {
         let tmp;
         if (typeof item == 'function') {

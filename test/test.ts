@@ -1,12 +1,11 @@
 
+import { or, and } from "../index"; 
 
-const { or, and } = require('../dist/index');
-
-
+debugger;
 describe('test-and', function () {
   it('-1', function (done) {
     try {
-      tmp = and(true, '==')(true, true, true);
+      const tmp = and(true, '==')(true, true, true);
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -23,7 +22,7 @@ describe('test-and', function () {
   });
   it('-2', function (done) {
     try {
-      tmp = and(true, '==')(true, true, true);
+      const tmp = and(true, '==')(true, true, true);
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -40,7 +39,7 @@ describe('test-and', function () {
   });
   it('-3', function (done) {
     try {
-      tmp = and(true, '==')(true, false, true);
+      const tmp = and(true, '==')(true, false, true);
       console.log(tmp);
       if (tmp == false) {
         console.log("OK");
@@ -57,7 +56,7 @@ describe('test-and', function () {
   });
   it('-4', function (done) {
     try {
-      tmp = and('yeppa', '==')('haha', 'hihi', 'lol');
+      const tmp = and('yeppa', '==')('haha', 'hihi', 'lol');
       console.log(tmp);
       if (tmp == false) {
         console.log("OK");
@@ -74,7 +73,7 @@ describe('test-and', function () {
   });
   it('-5', function (done) {
     try {
-      tmp = and('ciao', (x) => {
+      const tmp = and('ciao', (x: any) => {
         if (x == 'ciao') return true;
         else return false;
       })('haha', 'mona', 'ciao');
@@ -94,7 +93,7 @@ describe('test-and', function () {
   });
   it('-6', function (done) {
     try {
-      tmp = and(undefined, '==')(undefined, null);
+      const tmp = and(undefined, '==')(undefined, null);
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -111,7 +110,7 @@ describe('test-and', function () {
   });
   it('-7', function (done) {
     try {
-      tmp = and(['primo', 'secondo', 'terzo'], '!=')('quinto', 'sesto', 'settimo', 'ottavo', 'nono', 'decimo');
+      const tmp = and(['primo', 'secondo', 'terzo'], '!=')('quinto', 'sesto', 'settimo', 'ottavo', 'nono', 'decimo');
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -128,7 +127,7 @@ describe('test-and', function () {
   });
   it('-8', function (done) {
     try {
-      tmp = and(['primo', 'secondo', 'terzo'], '!=')('primo','quinto', 'sesto', 'settimo', 'ottavo', 'nono', 'decimo');
+      const tmp = and(['primo', 'secondo', 'terzo'], '!=')('primo', 'quinto', 'sesto', 'settimo', 'ottavo', 'nono', 'decimo');
       console.log(tmp);
       if (tmp == false) {
         console.log("OK");
@@ -145,7 +144,7 @@ describe('test-and', function () {
   });
   it('-9', function (done) {
     try {
-      tmp = and([0,1,2,3,4], '<')(5,6,7,8,9,10,11,12,13,14);
+      const tmp = and([0, 1, 2, 3, 4], '<')(5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -162,7 +161,7 @@ describe('test-and', function () {
   });
   it('-10', function (done) {
     try {
-      tmp = and([0,1,2,3,4], '>')(5,6,7,8,9,10,11,12,13,14);
+      const tmp = and([0, 1, 2, 3, 4], '>')(5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
       console.log(tmp);
       if (tmp == false) {
         console.log("OK");
@@ -183,7 +182,7 @@ describe('test-and', function () {
 describe('test-or', function () {
   it('-1', function (done) {
     try {
-      tmp = or(true, '==')(true, true, true);
+      const tmp = or(true, '==')(true, true, true);
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -200,7 +199,7 @@ describe('test-or', function () {
   });
   it('-2', function (done) {
     try {
-      tmp = or(true, '==')(true, false, true);
+      const tmp = or(true, '==')(true, false, true);
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -217,7 +216,7 @@ describe('test-or', function () {
   });
   it('-3', function (done) {
     try {
-      tmp = or(true, '==')(false, false, false);
+      const tmp = or(true, '==')(false, false, false);
       console.log(tmp);
       if (tmp == false) {
         console.log("OK");
@@ -234,7 +233,7 @@ describe('test-or', function () {
   });
   it('-4', function (done) {
     try {
-      tmp = or('yeppa', '==')('haha', 'hihi', 'lol');
+      const tmp = or('yeppa', '==')('haha', 'hihi', 'lol');
       console.log(tmp);
       if (tmp == false) {
         console.log("OK");
@@ -251,7 +250,7 @@ describe('test-or', function () {
   });
   it('-5', function (done) {
     try {
-      tmp = or('ciao', (x) => {
+      const tmp = or('ciao', (x: any) => {
         if (x == 'ciao') return true;
         else return false;
       })('haha', 'mona', 'ciao');
@@ -271,7 +270,7 @@ describe('test-or', function () {
   });
   it('-6', function (done) {
     try {
-      tmp = or(undefined, '!=')('haha', 'mona', 'ciao');
+      const tmp = or(undefined, '!=')('haha', 'mona', 'ciao');
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -288,7 +287,7 @@ describe('test-or', function () {
   });
   it('-7', function (done) {
     try {
-      tmp = or(undefined, '!=')(undefined, undefined, undefined);
+      const tmp = or(undefined, '!=')(undefined, undefined, undefined);
       console.log(tmp);
       if (tmp == false) {
         console.log("OK");
@@ -305,7 +304,7 @@ describe('test-or', function () {
   });
   it('-8', function (done) {
     try {
-      tmp = or(undefined, '!=')(undefined, null);
+      const tmp = or(undefined, '!=')(undefined, null);
       console.log(tmp);
       if (tmp == false) {
         console.log("OK");
@@ -322,7 +321,7 @@ describe('test-or', function () {
   });
   it('-9', function (done) {
     try {
-      tmp = or(undefined, '!=')(undefined, undefined, 'ciao');
+      const tmp = or(undefined, '!=')(undefined, undefined, 'ciao');
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -340,7 +339,7 @@ describe('test-or', function () {
 
   it('-10', function (done) {
     try {
-      tmp = or(['primo', 'secondo', 'terzo'], '!=')('primo','quinto', 'sesto', 'settimo', 'ottavo', 'nono', 'decimo');
+      const tmp = or(['primo', 'secondo', 'terzo'], '!=')('primo', 'quinto', 'sesto', 'settimo', 'ottavo', 'nono', 'decimo');
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -357,7 +356,7 @@ describe('test-or', function () {
   });
   it('-11', function (done) {
     try {
-      tmp = or([0,1,2,3,6], '<')(5,6,7,8,9,10,11,12,13,14);
+      const tmp = or([0, 1, 2, 3, 6], '<')(5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -374,7 +373,7 @@ describe('test-or', function () {
   });
   it('-12', function (done) {
     try {
-      tmp = or([0,1,2,3,6], '>')(5,6,7,8,9,10,11,12,13,14);
+      const tmp = or([0, 1, 2, 3, 6], '>')(5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");

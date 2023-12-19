@@ -1,28 +1,24 @@
-import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "./utility";
+import { flattenArray, FunzioneConfronto, howToHandleError, logicOperator, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "./utility";
 
 
 
 
-export const or = function (variableToCompare?: any | Array<any>, params?: operator, howToHandleError?: howToHandleError) {
+export const or = function (variableToCompare: any | Array<any | logicOperator>, params?: operator, howToHandleError?: howToHandleError): any {
     if (params == undefined) params = '==';
     return function (...comparisonVariables: any) {
         if (variableToCompare instanceof Array) {
-            for (const item of variableToCompare) {
-                var ritorno = OR(item, params, howToHandleError, comparisonVariables);
-                if (ritorno == true) {
-                    return true;
-                }
-            }
-            return false;
+            const risultarto = FunzioneConfronto(OR, '||', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
+            return risultarto;
         }
         else {
-            return OR(variableToCompare, params, howToHandleError, comparisonVariables);
+            return OR(variableToCompare, params, howToHandleError ?? 'error', comparisonVariables);
         }
     }
 };
 function OR(variableToCompare: any, params: any, howToHandleError: any, comparisonVariables: any) {
+    const comparisonVariablesFlat = flattenArray(comparisonVariables);
     try {
-        for (const y of comparisonVariables) {
+        for (const y of comparisonVariablesFlat) {
             var salta = false;
             var tmpY;
             var tmpVariabiliConfrontabile;

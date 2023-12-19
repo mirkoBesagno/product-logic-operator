@@ -1,4 +1,4 @@
-import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "./utility";
+import { flattenArray, FunzioneConfronto, howToHandleError, logicOperator, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "./utility";
 
 
 /**
@@ -8,17 +8,12 @@ import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchScelt
  * @param howToHandleError :CC
  * @returns :true o false
  */
-export const and = function (variableToCompare: any | Array<any>, params?: operator, howToHandleError?: howToHandleError):any {
+export const and = function (variableToCompare: any | Array<any| logicOperator>, params?: operator, howToHandleError?: howToHandleError): any {
     if (params == undefined) params = '==';
     return function (...comparisonVariables: any) {
-        if (variableToCompare instanceof Array) {
-            for (const item of variableToCompare) {
-                var ritorno = AND(item, params, howToHandleError ?? 'error', comparisonVariables);
-                if (ritorno == false) {
-                    return false;
-                }
-            }
-            return true;
+        if (variableToCompare instanceof Array) { 
+            const risultarto = FunzioneConfronto(AND, '&&', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
+            return risultarto;
         }
         else {
             return AND(variableToCompare, params, howToHandleError ?? 'error', comparisonVariables);
@@ -33,8 +28,9 @@ export const and = function (variableToCompare: any | Array<any>, params?: opera
  * @param howToHandleError :CC
  * @returns :true o false
  */
-function AND(variableToCompare: any, params: any, howToHandleError: howToHandleError, comparisonVariables: any):any {
-    for (const y of comparisonVariables) {
+function AND(variableToCompare: any, params: any, howToHandleError: howToHandleError, comparisonVariables: any): any {
+    const comparisonVariablesFlat = flattenArray(comparisonVariables);
+    for (const y of comparisonVariablesFlat) {
         var salta = false;
         var tmpY = y;
         if (typeof y == 'function') {
@@ -44,7 +40,7 @@ function AND(variableToCompare: any, params: any, howToHandleError: howToHandleE
         if (typeof variableToCompare == 'function') {
             tmpVariabiliConfrontabile = variableToCompare();
         }
-        if (typeof tmpVariabiliConfrontabile != typeof tmpY && tmpVariabiliConfrontabile != undefined) { 
+        if (typeof tmpVariabiliConfrontabile != typeof tmpY && tmpVariabiliConfrontabile != undefined) {
             const tmp = SwitchSceltaGestioneErrore(howToHandleError, y, tmpVariabiliConfrontabile);
             if (tmp.errore) {
                 throw new Error(tmp.errore);

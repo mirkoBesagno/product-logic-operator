@@ -44,8 +44,7 @@ function BY(variableToCompare: any, params: any, howToHandleError: howToHandleEr
         if (typeof variableToCompare == 'function') {
             tmpVariabiliConfrontabile = variableToCompare();
         }
-        if (typeof tmpVariabiliConfrontabile != typeof tmpY && tmpVariabiliConfrontabile != undefined) {
-            debugger;
+        if (typeof tmpVariabiliConfrontabile != typeof tmpY && tmpVariabiliConfrontabile != undefined) { 
             const tmp = SwitchSceltaGestioneErrore(howToHandleError, y, tmpVariabiliConfrontabile);
             if (tmp.errore) {
                 throw new Error(tmp.errore);

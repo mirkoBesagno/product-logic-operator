@@ -1,6 +1,7 @@
 
 
 export type operator = '<' | '>' | '==' | '<=' | '>=' | '!=' | ((x: any, y: any) => boolean);
+export type logicOperator = 'and' | 'or' | 'not' | '&' | '|' | '!';
 
 /**
  * @enum: 'error' : solleva un'eccezione qualora i tipi di dato da confrontare non siano uguali.
@@ -13,7 +14,7 @@ export type howToHandleError = 'error' | 'try' | 'return' | "skip" | "convert";
 
 export const messageErrore = "Error: different types"; // Errore: tipi differenti
 
-export function SwitchConfronto(params: operator | ((x: any) => boolean) | undefined, tmpVariabiliConfrontabile: any, tmpY: any):any {
+export function SwitchConfronto(params: operator | ((x: any) => boolean) | undefined, tmpVariabiliConfrontabile: any, tmpY: any): any {
     switch (params) {
         case '==':
             if (typeof tmpVariabiliConfrontabile == 'object') {
@@ -59,7 +60,7 @@ export function SwitchConfronto(params: operator | ((x: any) => boolean) | undef
             break;
         default:
             if (params) {
-                if (params(tmpY,tmpVariabiliConfrontabile) == true) {
+                if (params(tmpY, tmpVariabiliConfrontabile) == true) {
                     return true;
                 }
             }
@@ -80,7 +81,7 @@ export function SwitchConfronto(params: operator | ((x: any) => boolean) | undef
  * - salta : true / false
  * - tmpY: valorizzata / undefined
  */
-export function SwitchSceltaGestioneErrore(howToHandleError: howToHandleError, variabileOriginale: any, variabiliConfrontabile: any):any {
+export function SwitchSceltaGestioneErrore(howToHandleError: howToHandleError, variabileOriginale: any, variabiliConfrontabile: any): any {
     var salta = false;
     var tmpY: any;
     if (howToHandleError == 'error' || howToHandleError == undefined) {
@@ -138,4 +139,63 @@ export function SwitchSceltaGestioneErrore(howToHandleError: howToHandleError, v
         salta: salta,
         tmpY: tmpY
     };
+}
+
+export function FunzioneConfronto(funzioneDaEseguire: Function, simbolo: '&&' | '||', params: any, howToHandleError: any,
+    comparisonVariables: any, variableToCompare: any,) {
+    let risultatoString = '';
+    let index = 0;
+    for (const item of variableToCompare) {
+        let operatore = '';
+        try {
+            switch (item) {
+                case 'and':
+                case '&':
+                    operatore = ' && ';
+                    break;
+                case 'or':
+                case '|':
+                    operatore = ' || ';
+                    break;
+                case 'not':
+                case '!':
+                    operatore = ' !';
+                    break;
+                default:
+                    break;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        if (operatore == '') {
+            var ritorno = funzioneDaEseguire(item, params, howToHandleError, comparisonVariables);
+            if (index == 0) {
+                risultatoString = risultatoString + ritorno;
+            } else {
+                risultatoString = risultatoString + ' ' + simbolo + ' ' + ritorno;
+            }
+            index++;
+        } else {
+            risultatoString = risultatoString + " " + operatore + ' ';
+            index = 0;
+        }
+    }
+    const result = eval(risultatoString);
+    return result;
+}
+
+export function flattenArray(arr: any) {
+    let result: any = [];
+
+    arr.forEach((item: any) => {
+        if (Array.isArray(item)) {
+            // Se l'elemento è un array, richiama ricorsivamente la funzione flattenArray
+            result = result.concat(flattenArray(item));
+        } else {
+            // Se l'elemento non è un array, aggiungilo al risultato
+            result.push(item);
+        }
+    });
+
+    return result;
 }

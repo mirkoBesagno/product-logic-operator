@@ -1,0 +1,37 @@
+{
+	"tags":
+	{
+		"allowUnknownTags" : true
+	},
+	"plugins":[
+		 "plugins/markdown"
+		,"/Users/mirko.pizzini/Documents/GitHub/product-logic-operator/node_modules/tsdoc/template/plugins/TSDoc.js"
+	],
+	"opts":
+	{
+		"template"	:"/Users/mirko.pizzini/Documents/GitHub/product-logic-operator/node_modules/tsdoc/template",
+		"recurse"	:"true"
+	},
+	"templates" : {
+		"cleverLinks"     : false,
+		"monospaceLinks"  : false
+	},
+	"source":
+	{
+		"includePattern": "(\\.d)?\\.ts$"
+	},
+	"markdown"  : {
+		"parser"   : "gfm",
+		"hardwrap" : true
+	},
+	"tsdoc":{
+		"source"		:"/Users/mirko.pizzini/Documents/GitHub/product-logic-operator/src/",
+		"destination"	:"/Users/mirko.pizzini/Documents/GitHub/product-logic-operator/docs",
+		"tutorials"		:"",
+		"systemName"	: "product-logic-operator",
+		"footer"		: "",
+		"copyright"		: "product-logic-operator Copyright © 2023 mirko.pizzini.",
+		"outputSourceFiles" : true,
+		"commentsOnly": true
+	}
+}

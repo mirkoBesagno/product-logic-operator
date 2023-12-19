@@ -20,11 +20,42 @@ similmente:
 diventerebbe
 
 > and(a, '==')(x1,x2,x3,x4,x5);
-# OPZIONI
+
+# Struttura generale per funzioni
+La struttura delle due funzioni (and, or) è simile.
+> (variableToCompare: any | Array<any| logicOperator>, params?: operator, howToHandleError?: howToHandleError)
+
+di seguito spiegati i parametri:
+
+## variableToCompare: any | Array<any| logicOperator>
 accetta tipi normali: string e number. Accetta funzioni e le esegue prima di compararle. 
 > Attenzione in caso di errore rilancerà l'errore cosi come è.
 
-## howToHandleError
+Questo parametro qualora passato singolarmente entrera direttamentente nell'iter di accoppiamento, altrimenti avra un percorso alternativo. Se array potrebbe essere un array semplice di elementi da comparare, in questo caso l'operatore booleano verra deciso a seconda della funzione richiamata. 
+> es:  xx([a,b], '==')(x1,x2,x3,x4,x5); ->  a == x1 XX a == x2 XX a == x3 XX a == x4 XX a == x5 XX  b == x1 XX b == x2 XX b == x3 XX b == x4 XX b == x5
+
+al posto delle XX andiamo a sostituire l'operatore che viene deciso dalla funzione richiamata. Quindi con :
+- and avremo &&
+- or avremo ||
+
+Ma abbiamo un'ulteriore parametro da passare(type logicOperator), questo si divide in tre opzioni:
+- and puo essere rappresentata da: 'and', '&'
+- or puo essere rappresentata da: 'or', '|'
+- not puo essere rappresentata da: 'not', '!'
+
+Se andiamo ad inserirli dobbiamo usare un po' di testa, potrebbe essere causa di errore.
+Se inseriti cambiano l'operatore che si frappone fra le varie comparazione che si terranno alla destra e alla sinistre del simbolo. Esempio, usando un operatore "and" e scrivendolo proprio con "and": 
+> es:  xx([a,'and',b], '==')(x1,x2,x3,x4,x5); ->  a == x1 XX a == x2 XX a == x3 XX a == x4 XX a == x5 &&  b == x1 XX b == x2 XX b == x3 XX b == x4 XX b == x5
+
+Notare che ora independentemente dal metodo (and, or) usato fra il primo gruppo di comparazione (a)(x1,x2,x3,x4,x5) e il secondo (b)(x1,x2,x3,x4,x5) verra sempre infraposto l'operatore scielto, nel nostro cosa 'and'.
+
+## params?: operator
+Vanno a determinare quale operazione andare ad eseguire.
+> '<' | '>' | '==' | '<=' | '>=' | '!=' | ((x: any, y: any) => boolean);
+
+si possono andare ad usare i classici operatori di confronto oppure passare una funzione che verra richiamata al loro posto.
+
+## howToHandleError?: howToHandleError
 se i tipi sono differenti i casi gestibili sono specificabili settando la variabile howToHandleError:
 - error : solleva un errore: Errore: tipi differenti (questo è settabile in caso modificando la variabile messageErrore)
 - try:  provera il confronto
@@ -32,9 +63,6 @@ se i tipi sono differenti i casi gestibili sono specificabili settando la variab
 - skip : evita il confronto se i tipi sono differenti
 - convert : prova la confronto ma prima prova a convertire a un valore comune
 
-# Operatori
-Ultima cosa è il discorso degli operatori di confronto. Questi sono i classici ( ==, <, >, ecc) in oltre è possibile andare a inserire una funzione che svolga questo compito.
-> es: and(tmp, (x, y) => { if(x>y)return true; else return false; }, 'convert')(true, 'true', 1);
 
 # Shot
 Funzione che si propone si eseguire una operazione in un try-catch, cercando di snellire il procedimento e la scrittura.

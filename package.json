@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "module": "es5",
   "scripts": {
-    "test": "mocha",
+    "generate-docs": "jsdoc -c jsdoc.config.json",
+    "test": "mocha ./dist/test/test.js",
     "start": "ts-node ./index.ts",
     "start-esempio": "ts-node ./example.ts",
     "publicare-pacchetto": "npx np"
@@ -19,8 +20,10 @@
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^7.0.8",
+    "jsdoc": "^4.0.2",
     "size-limit": "^7.0.8",
     "ts-node": "^10.5.0",
+    "tsdoc": "0.0.4",
     "typescript": "^4.5.5"
   },
   "keywords": [
@@ -32,6 +35,7 @@
   ],
   "homepage": "https://github.com/mirkoBesagno/product-logic-operator#readme",
   "dependencies": {
+    "@types/mocha": "^10.0.6",
     "mocha": "^9.2.1"
   },
   "size-limit": [
