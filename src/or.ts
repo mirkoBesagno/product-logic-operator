@@ -15,6 +15,7 @@ export const or = function (variableToCompare: any | Array<any | logicOperator>,
         }
     }
 };
+
 function OR(variableToCompare: any, params: any, howToHandleError: any, comparisonVariables: any) {
     const comparisonVariablesFlat = flattenArray(comparisonVariables);
     try {
