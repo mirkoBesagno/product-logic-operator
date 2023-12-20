@@ -1,6 +1,7 @@
 
 
 export type operator = '<' | '>' | '==' | '<=' | '>=' | '!=' | ((x: any, y: any) => boolean);
+
 export type logicOperator = 'and' | 'or' | 'not' | '&' | '|' | '!';
 
 /**
@@ -141,6 +142,7 @@ export function SwitchSceltaGestioneErrore(howToHandleError: howToHandleError, v
     };
 }
 
+
 export function FunzioneConfronto(funzioneDaEseguire: Function, simbolo: '&&' | '||', params: any, howToHandleError: any,
     comparisonVariables: any, variableToCompare: any,) {
     let risultatoString = '';
@@ -183,6 +185,7 @@ export function FunzioneConfronto(funzioneDaEseguire: Function, simbolo: '&&' | 
     const result = eval(risultatoString);
     return result;
 }
+
 
 export function flattenArray(arr: any) {
     let result: any = [];
