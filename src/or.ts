@@ -3,9 +3,11 @@ import { flattenArray, FunzioneConfronto, howToHandleError, logicOperator, messa
 
 
 
-export const or = function (variableToCompare: any | Array<any | logicOperator>, params?: operator, howToHandleError?: howToHandleError): any {
-    if (params == undefined) params = '==';
-    return function (...comparisonVariables: any) {
+export const or = function (variableToCompare: any | Array<any | logicOperator>, params?: operator, howToHandleError?: howToHandleError): (...comparisonVariables: any) => boolean | Error {
+    if (params == undefined) {
+        params = '==';
+    }
+    return function (...comparisonVariables: any): boolean |Error {
         if (variableToCompare instanceof Array) {
             const risultarto = FunzioneConfronto(OR, '||', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
             return risultarto;
@@ -16,7 +18,7 @@ export const or = function (variableToCompare: any | Array<any | logicOperator>,
     }
 };
 
-function OR(variableToCompare: any, params: any, howToHandleError: any, comparisonVariables: any) {
+function OR(variableToCompare: any, params: any, howToHandleError: any, comparisonVariables: any): boolean | Error {
     const comparisonVariablesFlat = flattenArray(comparisonVariables);
     try {
         for (const y of comparisonVariablesFlat) {

@@ -36,7 +36,9 @@
   "homepage": "https://github.com/mirkoBesagno/product-logic-operator#readme",
   "dependencies": {
     "@types/mocha": "^10.0.6",
-    "mocha": "^10.2.0"
+    "@types/type-check": "^0.3.30",
+    "mocha": "^10.2.0",
+    "type-check": "^0.4.0"
   },
   "size-limit": [
     {

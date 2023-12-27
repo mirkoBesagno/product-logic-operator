@@ -1,5 +1,5 @@
 
-import { or, and } from "../index"; 
+import { or, and, check, parse } from "../index";
 
 debugger;
 describe('test-and', function () {
@@ -144,7 +144,7 @@ describe('test-and', function () {
   });
   it('-9', function (done) {
     try {
-      const tmp = and([0, 1, 2, 3, 4], '<')(5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
+      const tmp = and([0, 1, 2, 3, 4], '<')([5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
       console.log(tmp);
       if (tmp == true) {
         console.log("OK");
@@ -376,6 +376,47 @@ describe('test-or', function () {
       const tmp = or([0, 1, 2, 3, 6], '>')(5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
       console.log(tmp);
       if (tmp == true) {
+        console.log("OK");
+        done();
+      }
+      else {
+        console.log("NO!");
+        done(new Error("Errore!"));
+      }
+    } catch (error) {
+      console.log(error);
+      done(new Error("Errore!"));
+    }
+  });
+});
+
+describe('parse', function () {
+  it('-1', function (done) {
+    try {
+      const tmp = parse(String, 1);
+      console.log(tmp);
+      if (tmp == '1') {
+        console.log("OK");
+        done();
+      }
+      else {
+        console.log("NO!");
+        done(new Error("Errore!"));
+      }
+    } catch (error) {
+      console.log(error);
+      done(new Error("Errore!"));
+    }
+  });
+});
+
+
+describe('check', function () {
+  it('-1', function (done) {
+    try {
+      const tmp = check(String, 2);
+      console.log(tmp);
+      if (tmp) {
         console.log("OK");
         done();
       }

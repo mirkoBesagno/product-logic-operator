@@ -1,6 +1,15 @@
 import { flattenArray, FunzioneConfronto, howToHandleError, logicOperator, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "./utility";
 
+export type parametriAnd = { variableToCompare: any | Array<any | logicOperator>, params?: operator, howToHandleError?: howToHandleError };
 
+export type returnAnd = (...comparisonVariables: any) => boolean;
+
+export class ParametriAnd {
+    item: parametriAnd;
+    constructor(item: parametriAnd) {
+        this.item = item;
+    }
+}
 /**
  * 
  * @param variableToCompare : AA
@@ -8,10 +17,18 @@ import { flattenArray, FunzioneConfronto, howToHandleError, logicOperator, messa
  * @param howToHandleError :CC
  * @returns :true o false
  */
-export const and = function (variableToCompare: any | Array<any| logicOperator>, params?: operator, howToHandleError?: howToHandleError): any {
-    if (params == undefined) params = '==';
-    return function (...comparisonVariables: any) {
-        if (variableToCompare instanceof Array) { 
+export const and = function (variableToCompare: any | Array<any | logicOperator>, params?: operator, howToHandleError?: howToHandleError):
+    (...comparisonVariables: any) => boolean | Error {
+    if (params == undefined) {
+        params = '==';
+    }
+    return function (...comparisonVariables: any): boolean | Error {
+        /* if (comparisonVariables instanceof Array) {
+          if (comparisonVariables.length == 1 && comparisonVariables[0] instanceof ParametriAnd) {
+               return and(comparisonVariables);
+           }
+       } */
+        if (variableToCompare instanceof Array) {
             const risultarto = FunzioneConfronto(AND, '&&', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
             return risultarto;
         }
@@ -21,6 +38,8 @@ export const and = function (variableToCompare: any | Array<any| logicOperator>,
     }
 };
 
+
+
 /**
  * 
  * @param variableToCompare : AA
@@ -28,7 +47,7 @@ export const and = function (variableToCompare: any | Array<any| logicOperator>,
  * @param howToHandleError :CC
  * @returns :true o false
  */
-function AND(variableToCompare: any, params: any, howToHandleError: howToHandleError, comparisonVariables: any): any {
+function AND(variableToCompare: any, params: any, howToHandleError: howToHandleError, comparisonVariables: any): boolean | Error {
     const comparisonVariablesFlat = flattenArray(comparisonVariables);
     for (const y of comparisonVariablesFlat) {
         var salta = false;

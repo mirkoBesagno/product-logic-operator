@@ -16,6 +16,7 @@ export type howToHandleError = 'error' | 'try' | 'return' | "skip" | "convert";
 export const messageErrore = "Error: different types"; // Errore: tipi differenti
 
 export function SwitchConfronto(params: operator | ((x: any) => boolean) | undefined, tmpVariabiliConfrontabile: any, tmpY: any): any {
+
     switch (params) {
         case '==':
             if (typeof tmpVariabiliConfrontabile == 'object') {
@@ -69,7 +70,6 @@ export function SwitchConfronto(params: operator | ((x: any) => boolean) | undef
     }
     return false;
 };
-
 
 /**
  * 
@@ -142,7 +142,6 @@ export function SwitchSceltaGestioneErrore(howToHandleError: howToHandleError, v
     };
 }
 
-
 export function FunzioneConfronto(funzioneDaEseguire: Function, simbolo: '&&' | '||', params: any, howToHandleError: any,
     comparisonVariables: any, variableToCompare: any,) {
     let risultatoString = '';
@@ -186,7 +185,6 @@ export function FunzioneConfronto(funzioneDaEseguire: Function, simbolo: '&&' | 
     return result;
 }
 
-
 export function flattenArray(arr: any) {
     let result: any = [];
 
@@ -202,3 +200,5 @@ export function flattenArray(arr: any) {
 
     return result;
 }
+
+export type parametriDiDestra = any[]
