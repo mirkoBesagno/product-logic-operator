@@ -4,7 +4,6 @@ import { flattenArray, FunzioneConfronto, howToHandleError, logicOperator, messa
 
 
 export const assign = function (variableToCompare: any | Array<any | logicOperator>, howToHandleError?: howToHandleError): (...factorsVariables: any) => any | Error {
-variableToCompare = 'hahaha';
     return function (...factorsVariables: any): any | Array<any> | Error {
         if (variableToCompare instanceof Array) {
             let ritorno = [];

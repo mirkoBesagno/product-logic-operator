@@ -433,9 +433,10 @@ describe('test-check', function () {
 describe('test-assign', function () {
   it('-1', function (done) {
     try {
+      debugger;
       const tmp = assign("String",'try')(0);
       console.log(tmp);
-      if (tmp[0] == 'String') {
+      if (tmp == 'String') {
         console.log("OK");
         done();
       }
