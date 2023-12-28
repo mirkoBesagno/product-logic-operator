@@ -1,4 +1,4 @@
-import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "./utility";
+import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "../src/utility";
 
 
 /**
@@ -8,7 +8,7 @@ import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchScelt
  * @param howToHandleError :CC
  * @returns :true o false
  */
-export const by = function (variableToCompare: any | Array<any>, params?: operator, howToHandleError?: howToHandleError) {
+const by = function (variableToCompare: any | Array<any>, params?: operator, howToHandleError?: howToHandleError) {
     if (params == undefined) params = '==';
     return function (...comparisonVariables: any) {
         if (variableToCompare instanceof Array) {

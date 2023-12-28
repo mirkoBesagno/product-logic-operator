@@ -63,6 +63,14 @@ se i tipi sono differenti i casi gestibili sono specificabili settando la variab
 - skip : evita il confronto se i tipi sono differenti
 - convert : prova la confronto ma prima prova a convertire a un valore comune
 
+# Assign
+Funzione che cerca di combinare un unmero di elementi con un altro.
+Per esempio questo potrebbe essere un uso normale
+
+> assign("")("");
+
+# Take
+Funzione che si propone di eseguire una ricerca prendendo un numero di elemente e cercandoli all'internodi altri elemnti.
 
 # Shot
 Funzione che si propone si eseguire una operazione in un try-catch, cercando di snellire il procedimento e la scrittura.

@@ -1,7 +1,6 @@
 
-import { or, and, check, parse } from "../index";
+import { or, and, check, parse, assign } from "../index";
 
-debugger;
 describe('test-and', function () {
   it('-1', function (done) {
     try {
@@ -17,7 +16,7 @@ describe('test-and', function () {
       }
     } catch (error) {
       console.log(error);
-      done(new Error("Errore!"));
+      done(new Error("Errore! Irregolare!"));
     }
   });
   it('-2', function (done) {
@@ -34,7 +33,7 @@ describe('test-and', function () {
       }
     } catch (error) {
       console.log(error);
-      done(new Error("Errore!"));
+      done(new Error("Errore! Irregolare!"));
     }
   });
   it('-3', function (done) {
@@ -51,7 +50,7 @@ describe('test-and', function () {
       }
     } catch (error) {
       console.log(error);
-      done(new Error("Errore!"));
+      done(new Error("Errore! Irregolare!"));
     }
   });
   it('-4', function (done) {
@@ -68,7 +67,7 @@ describe('test-and', function () {
       }
     } catch (error) {
       console.log(error);
-      done(new Error("Errore!"));
+      done(new Error("Errore! Irregolare!"));
     }
   });
   it('-5', function (done) {
@@ -88,7 +87,7 @@ describe('test-and', function () {
       }
     } catch (error) {
       console.log(error);
-      done(new Error("Errore!"));
+      done(new Error("Errore! Irregolare!"));
     }
   });
   it('-6', function (done) {
@@ -105,7 +104,7 @@ describe('test-and', function () {
       }
     } catch (error) {
       console.log(error);
-      done(new Error("Errore!"));
+      done(new Error("Errore! Irregolare!"));
     }
   });
   it('-7', function (done) {
@@ -122,7 +121,7 @@ describe('test-and', function () {
       }
     } catch (error) {
       console.log(error);
-      done(new Error("Errore!"));
+      done(new Error("Errore! Irregolare!"));
     }
   });
   it('-8', function (done) {
@@ -139,7 +138,7 @@ describe('test-and', function () {
       }
     } catch (error) {
       console.log(error);
-      done(new Error("Errore!"));
+      done(new Error("Errore! Irregolare!"));
     }
   });
   it('-9', function (done) {
@@ -156,7 +155,7 @@ describe('test-and', function () {
       }
     } catch (error) {
       console.log(error);
-      done(new Error("Errore!"));
+      done(new Error("Errore! Irregolare!"));
     }
   });
   it('-10', function (done) {
@@ -173,7 +172,7 @@ describe('test-and', function () {
       }
     } catch (error) {
       console.log(error);
-      done(new Error("Errore!"));
+      done(new Error("Errore! Irregolare!"));
     }
   });
 });
@@ -390,7 +389,7 @@ describe('test-or', function () {
   });
 });
 
-describe('parse', function () {
+describe('test-parse', function () {
   it('-1', function (done) {
     try {
       const tmp = parse(String, 1);
@@ -411,12 +410,32 @@ describe('parse', function () {
 });
 
 
-describe('check', function () {
+describe('test-check', function () {
   it('-1', function (done) {
     try {
       const tmp = check(String, 2);
       console.log(tmp);
-      if (tmp) {
+      if (tmp == false) {
+        console.log("OK");
+        done();
+      }
+      else {
+        console.log("NO!");
+        done(new Error("Errore!"));
+      }
+    } catch (error) {
+      console.log(error);
+      done(new Error("Errore!"));
+    }
+  });
+});
+
+describe('test-assign', function () {
+  it('-1', function (done) {
+    try {
+      const tmp = assign("String",'try')(0);
+      console.log(tmp);
+      if (tmp[0] == 'String') {
         console.log("OK");
         done();
       }

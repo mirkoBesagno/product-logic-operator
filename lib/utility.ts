@@ -80,7 +80,7 @@ export function SwitchConfronto(params: operator | ((x: any) => boolean) | undef
  * - Error()
  * - return false; #interrupt#
  * - salta : true / false
- * - tmpY: valorizzata / undefined
+ * - result: valorizzata / undefined
  */
 export function SwitchSceltaGestioneErrore(howToHandleError: howToHandleError, variabileOriginale: any, variabiliConfrontabile: any): any {
     var salta = false;
@@ -90,7 +90,7 @@ export function SwitchSceltaGestioneErrore(howToHandleError: howToHandleError, v
             errore: messageErrore,
             interrupt: undefined,
             salta: undefined,
-            tmpY: undefined
+            result: undefined
         };
     }
     else if (howToHandleError == 'return') {
@@ -98,13 +98,14 @@ export function SwitchSceltaGestioneErrore(howToHandleError: howToHandleError, v
             errore: undefined,
             interrupt: false,
             salta: undefined,
-            tmpY: undefined
+            result: undefined
         };
     } else if (howToHandleError == 'skip') {
         salta = true;
     }
     else if (howToHandleError == 'try') {
         salta = false;
+        tmpY = variabileOriginale;
     }
     else if (howToHandleError == 'convert') {
         salta = false;
@@ -125,7 +126,7 @@ export function SwitchSceltaGestioneErrore(howToHandleError: howToHandleError, v
             tmpY = Symbol(variabileOriginale);
         }
         else if (typeof variabiliConfrontabile == 'function') {
-            tmpY = Function(variabileOriginale);
+            tmpY = variabileOriginale;
         }
         else if (typeof variabiliConfrontabile == 'object') {
             tmpY = Object(variabileOriginale);
@@ -138,7 +139,7 @@ export function SwitchSceltaGestioneErrore(howToHandleError: howToHandleError, v
         errore: undefined,
         interrupt: undefined,
         salta: salta,
-        tmpY: tmpY
+        result: tmpY
     };
 }
 

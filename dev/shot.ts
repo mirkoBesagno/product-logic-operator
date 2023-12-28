@@ -1,6 +1,6 @@
 
 
-import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "./utility";
+import { howToHandleError, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "../lib/utility";
 
 
 /**

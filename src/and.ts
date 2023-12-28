@@ -1,4 +1,4 @@
-import { flattenArray, FunzioneConfronto, howToHandleError, logicOperator, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "./utility";
+import { flattenArray, FunzioneConfronto, howToHandleError, logicOperator, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "../lib/utility";
 
 export type parametriAnd = { variableToCompare: any | Array<any | logicOperator>, params?: operator, howToHandleError?: howToHandleError };
 
@@ -10,6 +10,7 @@ export class ParametriAnd {
         this.item = item;
     }
 }
+
 /**
  * 
  * @param variableToCompare : AA
@@ -24,10 +25,11 @@ export const and = function (variableToCompare: any | Array<any | logicOperator>
     }
     return function (...comparisonVariables: any): boolean | Error {
         /* if (comparisonVariables instanceof Array) {
-          if (comparisonVariables.length == 1 && comparisonVariables[0] instanceof ParametriAnd) {
-               return and(comparisonVariables);
-           }
-       } */
+            if (comparisonVariables.length == 1 && comparisonVariables[0] instanceof ParametriAnd) {
+                const ris = and;
+                return ris;
+            }
+        } */
         if (variableToCompare instanceof Array) {
             const risultarto = FunzioneConfronto(AND, '&&', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
             return risultarto;
@@ -67,7 +69,7 @@ function AND(variableToCompare: any, params: any, howToHandleError: howToHandleE
                 return tmp.interrupt;
             } else {
                 salta = tmp.salta ?? false;
-                tmpY = tmp.tmpY;
+                tmpY = tmp.result;
             }
         }
         if (salta == false) {
@@ -79,3 +81,5 @@ function AND(variableToCompare: any, params: any, howToHandleError: howToHandleE
     }
     return true;
 }
+
+ 

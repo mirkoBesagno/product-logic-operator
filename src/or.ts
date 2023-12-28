@@ -1,4 +1,4 @@
-import { flattenArray, FunzioneConfronto, howToHandleError, logicOperator, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "./utility";
+import { flattenArray, FunzioneConfronto, howToHandleError, logicOperator, messageErrore, operator, SwitchConfronto, SwitchSceltaGestioneErrore } from "../lib/utility";
 
 
 
@@ -38,14 +38,14 @@ function OR(variableToCompare: any, params: any, howToHandleError: any, comparis
                 tmpVariabiliConfrontabile = variableToCompare;
             }
             if (typeof tmpVariabiliConfrontabile != typeof tmpY && tmpVariabiliConfrontabile != undefined) {
-                const tmp = SwitchSceltaGestioneErrore(howToHandleError, y, tmpVariabiliConfrontabile);
+                const tmp = SwitchSceltaGestioneErrore(howToHandleError, tmpY, tmpVariabiliConfrontabile);
                 if (tmp.errore) {
                     throw new Error(tmp.errore);
                 } else if (tmp.interrupt) {
                     return tmp.interrupt;
                 } else {
                     salta = tmp.salta ?? false;
-                    tmpY = tmp.tmpY;
+                    tmpY = tmp.result;
                 }
             }
             if (salta == false) {
