@@ -23,8 +23,8 @@
   "include": [ 
     "./test/**/*.ts",
     "./src/**/*.ts",
-    "./index.ts"
-, "dev/by.ts", "lib/utility.ts", "dev/shot.ts", "dev/take.ts"  ],
+    "./index.ts",
+"lib/utility.ts",   ],
   "exclude": [ 
     "dev",
     "./**/*.d.ts",
