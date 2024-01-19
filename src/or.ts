@@ -7,18 +7,28 @@ export const or = function (variableToCompare: any | Array<any | logicOperator>,
     if (params == undefined) {
         params = '==';
     }
-    return function (...comparisonVariables: any): boolean |Error {
+    return function (...comparisonVariables: any): boolean | Error {
         if (variableToCompare instanceof Array) {
-            const risultarto = FunzioneConfronto(OR, '||', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
+            const risultarto = FunzioneConfronto(_or, '||', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
             return risultarto;
         }
         else {
-            return OR(variableToCompare, params, howToHandleError ?? 'error', comparisonVariables);
+            return _or(variableToCompare, params, howToHandleError ?? 'error', comparisonVariables);
         }
     }
 };
 
-function OR(variableToCompare: any, params: any, howToHandleError: any, comparisonVariables: any): boolean | Error {
+export const OR = function (variableToCompare: any | Array<any | logicOperator>, params?: operator, howToHandleError?: howToHandleError, ...comparisonVariables: any) {
+    if (variableToCompare instanceof Array) {
+        const risultarto = FunzioneConfronto(_or, '||', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
+        return risultarto;
+    }
+    else {
+        return _or(variableToCompare, params, howToHandleError ?? 'error', comparisonVariables);
+    }
+}
+
+function _or(variableToCompare: any, params: any, howToHandleError: any, comparisonVariables: any): boolean | Error {
     const comparisonVariablesFlat = flattenArray(comparisonVariables);
     try {
         for (const y of comparisonVariablesFlat) {

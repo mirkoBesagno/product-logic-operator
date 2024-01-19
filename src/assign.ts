@@ -8,12 +8,12 @@ export const assign = function (variableToCompare: any | Array<any | logicOperat
         if (variableToCompare instanceof Array) {
             let ritorno = [];
             for (const y of variableToCompare) {
-                ritorno.push(ASSIGN(y, howToHandleError ?? 'error', factorsVariables));
+                ritorno.push(_assign(y, howToHandleError ?? 'error', factorsVariables));
             }
             return ritorno;
         }
         else {
-            const tmp = ASSIGN(variableToCompare, howToHandleError ?? 'error', factorsVariables);
+            const tmp = _assign(variableToCompare, howToHandleError ?? 'error', factorsVariables);
             if (variableToCompare instanceof Array) {
                 return tmp;
             }
@@ -22,7 +22,24 @@ export const assign = function (variableToCompare: any | Array<any | logicOperat
     }
 };
 
-function ASSIGN(variableToCompare: any, howToHandleError: any, factorsVariables: any): any | Array<any> | Error {
+export function ASSIGN(variableToCompare: any, howToHandleError: any, factorsVariables: any) {
+    if (variableToCompare instanceof Array) {
+        let ritorno = [];
+        for (const y of variableToCompare) {
+            ritorno.push(_assign(y, howToHandleError ?? 'error', factorsVariables));
+        }
+        return ritorno;
+    }
+    else {
+        const tmp = _assign(variableToCompare, howToHandleError ?? 'error', factorsVariables);
+        if (variableToCompare instanceof Array) {
+            return tmp;
+        }
+        return tmp[0];
+    }
+}
+
+function _assign(variableToCompare: any, howToHandleError: any, factorsVariables: any): any | Array<any> | Error {
     const factorsVariablesFlat = flattenArray(factorsVariables);
     let ritorno: any[] = [];
     try {

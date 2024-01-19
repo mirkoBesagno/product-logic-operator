@@ -31,14 +31,24 @@ export const and = function (variableToCompare: any | Array<any | logicOperator>
             }
         } */
         if (variableToCompare instanceof Array) {
-            const risultarto = FunzioneConfronto(AND, '&&', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
+            const risultarto = FunzioneConfronto(_and, '&&', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
             return risultarto;
         }
         else {
-            return AND(variableToCompare, params, howToHandleError ?? 'error', comparisonVariables);
+            return _and(variableToCompare, params, howToHandleError ?? 'error', comparisonVariables);
         }
     }
 };
+
+export const AND = function (variableToCompare: any | Array<any | logicOperator>, params?: operator, howToHandleError?: howToHandleError, ...comparisonVariables: any) {
+    if (variableToCompare instanceof Array) {
+        const risultarto = FunzioneConfronto(_and, '&&', params, howToHandleError ?? 'error', comparisonVariables, variableToCompare);
+        return risultarto;
+    }
+    else {
+        return _and(variableToCompare, params, howToHandleError ?? 'error', comparisonVariables);
+    }
+}
 
 
 
@@ -49,7 +59,7 @@ export const and = function (variableToCompare: any | Array<any | logicOperator>
  * @param howToHandleError :CC
  * @returns :true o false
  */
-function AND(variableToCompare: any, params: any, howToHandleError: howToHandleError, comparisonVariables: any): boolean | Error {
+function _and(variableToCompare: any | Array<any | logicOperator>, params: any, howToHandleError: howToHandleError, comparisonVariables: any): boolean | Error {
     const comparisonVariablesFlat = flattenArray(comparisonVariables);
     for (const y of comparisonVariablesFlat) {
         var salta = false;
@@ -82,4 +92,3 @@ function AND(variableToCompare: any, params: any, howToHandleError: howToHandleE
     return true;
 }
 
- 
